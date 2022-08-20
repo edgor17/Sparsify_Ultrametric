@@ -10,6 +10,8 @@ from ete3 import Tree
 import numpy as np
 import scipy as scipy
 
+#find_matching_index() was written by user Olivier Melançon in https://stackoverflow.com/questions/49247506/how-to-efficiently-find-the-indices-of-matching-elements-in-two-lists
+
 def find_matching_index(list1, list2):
 
     inverse_index = { element: index for index, element in enumerate(list1) }
