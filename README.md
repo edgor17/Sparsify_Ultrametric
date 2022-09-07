@@ -9,5 +9,6 @@ haarlikeproj then projects OTU data over the Haar-like basis. This requires a ta
 haarlikedistances computes the pairwise Haar-like distances between all environments. The resulting distance matrix can be exported for visualization in QIIME2 or a PCoA embedding can be computed using skbio. 
 
 
-
+Acknowledgments
+The fast method for matching indices in SPARSIFY is thanks to a StackOverflow answer by Olivier Melançon found here: https://stackoverflow.com/questions/49247506/how-to-efficiently-find-the-indices-of-matching-elements-in-two-lists
 
