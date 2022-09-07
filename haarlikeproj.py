@@ -28,8 +28,9 @@ for i in range(microbialdata.shape[0]):
     store=microbialdata[i,0]
     num=store.astype(int)
     name=num.astype(str)
+    leafloc=leaflist.index(name)
     for j in range(1,N+1):
-        abundvec[leaflist.index(name),j-1]=microbialdata[i,j]
+        abundvec[leafloc,j-1]=microbialdata[i,j]
 
 #normalize abundance counts        
 abundvecnormalized=abundvec/np.transpose(np.sum(abundvec, axis=0)[:,None])
