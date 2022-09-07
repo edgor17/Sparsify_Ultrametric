@@ -14,7 +14,7 @@ As an example we can compute the Haar-like distances (and resulting PCoA embeddi
 
 Next the OTU data (microbialmatall.csv) is projected over the Haar-like basis producing a vector of scalars associated with each environment. These vectors are then scaled by eigest97 and summed to compute the Haar-like distances. Embedding these results using PCoA results in the following plot where the darker greys represent shallower soil samples:
 
-
+![alt text](https://https://github.com/edgor17/Sparsify-Ultrametric/blob/main/soilgradient.png?raw=true "Title")
 
 Acknowledgments
 
