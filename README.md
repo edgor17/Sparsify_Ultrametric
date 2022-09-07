@@ -10,5 +10,6 @@ haarlikedistances computes the pairwise Haar-like distances between all environm
 
 
 Acknowledgments
+
 The fast method for matching indices in SPARSIFY is thanks to a StackOverflow answer by Olivier Melançon found here: https://stackoverflow.com/questions/49247506/how-to-efficiently-find-the-indices-of-matching-elements-in-two-lists
 
