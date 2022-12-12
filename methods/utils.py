@@ -22,7 +22,6 @@ def compute_Haar_dist(data,Haar_like,weightvec,normalized):
     #Build Haar-like distance matrix
     D=np.zeros((N,N))
     for i in range(N):
-        print(i)
         for j in range(i+1,N):
             distdiff=((modmags[i,:]-modmags[j,:]))
             d=np.sum(np.square(distdiff))
