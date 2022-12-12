@@ -27,7 +27,7 @@ def compute_Haar_dist(data,Haar_like,weightvec,normalized):
             d=np.sum(np.square(distdiff))
             D[i,j]=np.sqrt(d)        
     D=D+np.transpose(D)
-    return D
+    return D, modmags
 
 def Match_to_tree(data, tree):
     #maps the given OTU abundances onto a reference tree. Data must include OTU ids as columns 
@@ -53,3 +53,4 @@ def Match_to_tree(data, tree):
         leafloc=leaflist.index(name)
         for j in range(1,N+1):
             abundvec[j-1,leafloc]=data[j,i]
+    return abundvec
