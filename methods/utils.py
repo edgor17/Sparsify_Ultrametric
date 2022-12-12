@@ -9,7 +9,7 @@ def compute_Haar_dist(data,Haar_like,weightvec,normalized):
     #produces distances similar to that of DPCOA. normalized=True will divide each row by the sum of its OTU counts. 
     #This outputs a pairwise distance matrix that can be visualized via PCoA or some other embedding method. Additionally, this can output 
     # the weighted projections onto the Haar_like basis which can be used to produce spectrogram-like plots comparing two samples. 
-    abunds=scipy.sparse.csr_matrix(data)
+    abunds=scipy.sparse.csr_matrix(data.T)
     if normalized:
         abunds=abunds/abunds.sum(0)
         abunds=scipy.sparse.csr_matrix(abunds)
