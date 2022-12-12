@@ -1,6 +1,5 @@
 import pandas as pd
 import scipy as scipy
-import scipy.sparse
 import numpy as np
 from ete3 import Tree
 
