@@ -16,7 +16,7 @@ def compute_Haar_dist(data,Haar_like,weightvec,normalized):
     mags=Haar_like@abunds
     modmags=np.transpose(np.asarray(mags.todense())* weightvec[:, np.newaxis])
     
-    N=len(data[0,:])
+    N=len(data[:,0])
     
     #Build Haar-like distance matrix
     D=np.zeros((N,N))
