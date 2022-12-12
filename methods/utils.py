@@ -8,7 +8,8 @@ def compute_Haar_dist(data,Haar_like,weightvec,normalized):
     #data should consist of OTU abundance counts where each row is a sample and each column is an OTU ID. 
     #The weightvec weights projections onto each Haar-like wavelet. Using the diagonal of the sparsified phylogenetic covariance 
     #produces distances similar to that of DPCOA. normalized=True will divide each row by the sum of its OTU counts. 
-    #The output is a pairwise distance matrix that can be visualized via PCoA or some other embedding method. 
+    #This outputs a pairwise distance matrix that can be visualized via PCoA or some other embedding method. Additionally, this can output 
+    # the weighted projections onto the Haar_like basis which can be used to produce spectrogram-like plots comparing two samples. 
     abunds=scipy.sparse.csr_matrix(data)
     if normalized:
         abunds=abunds/abunds.sum(0)
