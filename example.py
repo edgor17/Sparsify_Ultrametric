@@ -17,7 +17,7 @@ abundvecs=Match_to_tree(data,"97_otus_unannotated.tree")
 
 #compute the pairwise Haar-like distances between environments. This is done by projecting OTU abundance onto the Haar-like 
 #vectors and rescaling by the estimated eigenvalues of the 97 Greengenes covariance matrix
-[D,mags]=compute_Haar_dist(data,Haar_like,eigest,normalized=True)
+[D,mags]=compute_Haar_dist(abundvecs,Haar_like,eigest,normalized=True)
 
 #Spectrogram-like plot comparing the first and second environments w.r.t the Haar-like basis. The sum of the magnitude of the 
 #spikes in this plot is the Haar-like distance between the two environments. Accordingly, this plot shows how each split in the 
