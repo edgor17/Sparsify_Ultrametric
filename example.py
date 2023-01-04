@@ -24,5 +24,6 @@ abundvecs=Match_to_tree(data,"97_otus_unannotated.tree")
 #phylogeny contributed to the resulting Haar-like distance. 
 plt.plot(np.square(mags[0,:]-mags[1,:]))
 
-
-
+#Compute the coordinates of the PCoA embedding of D
+embedding = MDS(n_components=2,dissimilarity='precomputed')
+X_transformed = embedding.fit_transform(D)
