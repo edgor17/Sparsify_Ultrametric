@@ -15,6 +15,7 @@ def compute_Haar_dist(data,Haar_like,weightvec,normalized):
         abunds=scipy.sparse.csr_matrix(abunds)
     mags=Haar_like@abunds
     modmags=np.transpose(np.asarray(mags.todense())* np.sqrt(weightvec[:, np.newaxis]))
+    modmags=scipy.sparse.csr_matrix(modmags)
     
     N=len(data[:,0])
     
@@ -23,7 +24,7 @@ def compute_Haar_dist(data,Haar_like,weightvec,normalized):
     for i in range(N):
         for j in range(i+1,N):
             distdiff=((modmags[i,:]-modmags[j,:]))
-            d=np.sum(np.square(distdiff))
+            d=scipy.sparse.csr_matrix.sum(scipy.sparse.csr_matrix.power(distdiff,2))
             D[i,j]=np.sqrt(d)        
     D=D+np.transpose(D)
     return D, modmags
