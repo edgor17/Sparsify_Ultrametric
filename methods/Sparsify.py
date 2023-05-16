@@ -187,4 +187,4 @@ def sparsify(tree):
   c=scipy.sparse.coo_matrix((datadiag, (rowdiag, coldiag)), shape=(len(allleaves), len(allleaves)))        
   pseudodiag=a+a.transpose()-c
   
-  return pseudodiag
+  return sparsehaarlike, pseudodiag
