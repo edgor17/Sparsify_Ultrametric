@@ -1,5 +1,6 @@
 from setuptools import setup
-
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 setup(
     name='Sparsify_Ultrametric',
     url='https://github.com/edgor17/Sparsify-Ultrametric',
@@ -9,5 +10,5 @@ setup(
     install_requires=['numpy','pandas','ete3','scipy','matplotlib'],
     version='0.1',
     description='Sparsification of Strictly Ultrametric Matrices',
-    long_description=open('README.txt').read(),
+    long_description=long_description
 )
