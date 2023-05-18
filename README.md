@@ -29,6 +29,7 @@ This computation may be slow, we have included the precomputed haarlike and pseu
 To demonstrate the Haar-like distance we consider microbial mat samples from the Guerrero Negro hypersaline microbial mat (Harris et al., 2012). This data was obtained from [QIITA](https://qiita.ucsd.edu/study/description/1200#). We read in the feature table (OTU counts) and metadata (containing sample depths) then project these OTU counts onto the Haar-like basis resulting in "mags"
 
 ```
+from Sparsify_Ultrametric.utils import PreProcess
 featuretable=pd.read_csv("/raw_data/mat/otus.txt", sep='\t')
 metadata=pd.read_csv("/raw_data/metadata.txt", sep='\t')
 [X,Y,mags,dic]=PreProcess(featuretable,metadata,'end_depth','regression',tree,haarlike)
@@ -37,12 +38,20 @@ metadata=pd.read_csv("/raw_data/metadata.txt", sep='\t')
 To compute the Haar-like distances between these samples we need to rescale by lambda_v, obtained from the diagonal of our sparsified covariance matrix. 
 
 ```
+from Sparsify_Ultrametric.utils import compute_Haar_dist
 lambdav=scipy.sparse.csr_matrix.diagonal(pseudodiag)
 [D,modmags]=compute_Haar_dist(mags,lambdav)
 ```
 
+We can then plot the associated PCoA embedding.
 
-Acknowledgments
+```
+from Sparsify_Ultrametric.utils import PCoA
+X=PCoA(D,2)
+fig=plt.figure(figsize=(8, 2))
+plt.scatter(-X[:,0] ,-X[:,1] ,c=y, cmap='viridis')
+plt.colorbar(label='end_depth')
+plt.title('Haar-like Distances')
 
-The fast method for matching indices in SPARSIFY is thanks to a StackOverflow answer by Olivier Melançon found here: https://stackoverflow.com/questions/49247506/how-to-efficiently-find-the-indices-of-matching-elements-in-two-lists
+
 
