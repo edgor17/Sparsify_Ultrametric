@@ -2,6 +2,7 @@
 
 pseudodiag=scipy.sparse.load_npz('/precomputed/97pseudodiag.npz')
 eigvals=scipy.sparse.linalg.eigs(pseudodiag,500)
+lambdav=scipy.sparse.csr_matrix.diagonal(pseudodiag)
 
 fig,ax = plt.subplots()
 true=ax.scatter(np.linspace(1,500,500),np.log(np.flip(eigvals)),label='True Eigenvalues')
