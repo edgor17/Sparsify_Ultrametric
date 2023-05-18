@@ -1,3 +1,5 @@
+#used to generate figure 6
+
 pseudodiag=scipy.sparse.load_npz('97pseudodiag.npz')
 m = coo_matrix(pseudodiag)
 fig = plt.figure()
