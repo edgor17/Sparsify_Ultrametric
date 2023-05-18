@@ -25,7 +25,7 @@ def compute_Haar_dist(mags,weightvec):
     modmags=np.transpose(np.asarray(mags.todense())* np.sqrt(weightvec[:, np.newaxis]))
     modmags=scipy.sparse.csr_matrix(modmags)
     
-    N=len(mags[:,0])
+    N=mags.shape[1]
     
     #Build Haar-like distance matrix
     D=np.zeros((N,N))
@@ -74,3 +74,17 @@ def Match_to_tree(data, tree):
         for j in range(1,N+1):
             abundvecs[j-1,leafloc]=data[j,i]
     return abundvecs
+
+def PCoA(D,n):
+    A2=np.square(D)
+    J=np.eye(len(D))-1/(len(D))*np.ones(len(D))
+    B=-1/2*J@A2@J
+    [D,V]=np.linalg.eigh(B)
+    D=np.real(D)
+    D=np.flip(D)
+    V=np.flip(V,axis=1)
+    V=V[:,0:n]
+    D=np.sqrt(D[0:n])
+    X=V@np.diag(D)
+    
+    return X
