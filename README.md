@@ -34,8 +34,11 @@ metadata=pd.read_csv("/raw_data/metadata.txt", sep='\t')
 [X,Y,mags,dic]=PreProcess(featuretable,metadata,'end_depth','regression',tree,haarlike)
 ```
 
+To compute the Haar-like distances between these samples we need to rescale by lambda_v, obtained from the diagonal of our sparsified covariance matrix. 
+
 ```
-[D,modmags]=compute_Haar_dist(mags,weightvec)
+lambdav=scipy.sparse.csr_matrix.diagonal(pseudodiag)
+[D,modmags]=compute_Haar_dist(mags,lambdav)
 ```
 
 
