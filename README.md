@@ -1,8 +1,27 @@
 # Sparsify-Ultrametric
 
-Requires: Numpy, SciPy, ETE Tooklkit, sci-kit bio
+This package contains all data and scripts to reproduce the analysis in "Sparsification of Large Ultrametric Matrices: Insights into the Microbial Tree of Life"
 
-Sparsify takes a newick tree structure as an input and produces its assocaited Haar-like wavelet basis and sparsified covariance matrix. Note that most phylogenetic trees (such as Greengenes) are actually two ORB-Trees connected to an external root with branch length zero. This is implicity assumed in Sparsify.
+To install:
+
+'''
+git clone https://github.com/edgor17/Sparsify_Ultrametric
+cd Sparsify_Ultrametric/
+pip install .
+'''
+
+The main goal is to take a binary tree structure and to produce the associated Haar-like wavelet basis and sparsified covariance matrix. We use ete3 to read .nwk formatted trees into a python data structure.  
+
+'''
+from Sparsify_Ultrametric import Sparsify
+from ete3 import Tree
+
+tree = Tree("/raw_data/97_otus_unannotated.tree",format=1)
+[haarlike,pseudodiag]=Sparsify(tree)
+'''
+
+This computation may be slow, we have included the precomputed haarlike and pseudodiag files for convenience.
+
 
 Given data consisting of OTU abundances it is necessary to map these abundances onto a reference phylogenetic tree. We require a table of OTU counts where each row is a sample and the columns are OTU ID's . The first row must consist of the OTU ids in quotations, these OTU ids are mapped to the leaves of the given tree.
 
