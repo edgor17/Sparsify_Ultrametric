@@ -2,23 +2,25 @@
 
 This package contains all data and scripts to reproduce the analysis in "Sparsification of Large Ultrametric Matrices: Insights into the Microbial Tree of Life"
 
-To install:
+### Installation 
 
-'''
+```
 git clone https://github.com/edgor17/Sparsify_Ultrametric
 cd Sparsify_Ultrametric/
 pip install .
-'''
+```
+
+### Computation of the Haar-like Basis and Sparsified Covariance
 
 The main goal is to take a binary tree structure and to produce the associated Haar-like wavelet basis and sparsified covariance matrix. We use ete3 to read .nwk formatted trees into a python data structure.  
 
-'''
+```
 from Sparsify_Ultrametric import Sparsify
 from ete3 import Tree
 
 tree = Tree("/raw_data/97_otus_unannotated.tree",format=1)
 [haarlike,pseudodiag]=Sparsify(tree)
-'''
+```
 
 This computation may be slow, we have included the precomputed haarlike and pseudodiag files for convenience.
 
