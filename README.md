@@ -52,6 +52,9 @@ fig=plt.figure(figsize=(8, 2))
 plt.scatter(-X[:,0] ,-X[:,1] ,c=y, cmap='viridis')
 plt.colorbar(label='end_depth')
 plt.title('Haar-like Distances')
+```
+![paper1](https://github.com/edgor17/Sparsify_Ultrametric/assets/87628022/10174ff8-1463-42fe-81b6-e53d3cc8588b)
+
 
 
 
