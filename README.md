@@ -52,6 +52,7 @@ We can then plot the associated PCoA embedding.
 from Sparsify_Ultrametric.utils import PCoA
 import matplotlib.pyplot as plt
 
+y=Y.values.astype('float')
 X=PCoA(D,2)
 fig=plt.figure(figsize=(8, 2))
 plt.scatter(-X[:,0] ,-X[:,1] ,c=y, norm=colors.LogNorm(vmin=y.min(), vmax=y.max()),cmap='viridis')
