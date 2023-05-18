@@ -24,10 +24,20 @@ tree = Tree("/raw_data/97_otus_unannotated.tree",format=1)
 
 This computation may be slow, we have included the precomputed haarlike and pseudodiag files for convenience.
 
+### The Haar-like Distance
 
-Given data consisting of OTU abundances it is necessary to map these abundances onto a reference phylogenetic tree. We require a table of OTU counts where each row is a sample and the columns are OTU ID's . The first row must consist of the OTU ids in quotations, these OTU ids are mapped to the leaves of the given tree.
+To demonstrate the Haar-like distance we consider microbial mat samples from the Guerrero Negro hypersaline microbial mat (Harris et al., 2012). This data was obtained from [QIITA](https://qiita.ucsd.edu/study/description/1200#). We read in the feature table (OTU counts) and metadata (containing sample depths) then project these OTU counts onto the Haar-like basis resulting in "mags"
 
-example. py shows how to compute the Haar-like distances (and resulting PCoA embedding) of microbial mat samples from the Guerrero Negro hypersaline microbial mat (Harris et al., 2012). We also show how to obtain the spectrogram-like plots of Haar_like projections comparing two environments. 
+```
+featuretable=pd.read_csv("/raw_data/mat/otus.txt", sep='\t')
+metadata=pd.read_csv("/raw_data/metadata.txt", sep='\t')
+[X,Y,mags,dic]=PreProcess(featuretable,metadata,'end_depth','regression',tree,haarlike)
+```
+
+```
+[D,modmags]=compute_Haar_dist(mags,weightvec)
+```
+
 
 Acknowledgments
 
