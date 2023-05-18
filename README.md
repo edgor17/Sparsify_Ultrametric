@@ -30,6 +30,8 @@ To demonstrate the Haar-like distance we consider microbial mat samples from the
 
 ```
 from Sparsify_Ultrametric.utils import PreProcess
+import pandas as pd
+
 featuretable=pd.read_csv("/raw_data/mat/otus.txt", sep='\t')
 metadata=pd.read_csv("/raw_data/metadata.txt", sep='\t')
 [X,Y,mags,dic]=PreProcess(featuretable,metadata,'end_depth','regression',tree,haarlike)
@@ -39,6 +41,7 @@ To compute the Haar-like distances between these samples we need to rescale by l
 
 ```
 from Sparsify_Ultrametric.utils import compute_Haar_dist
+
 lambdav=scipy.sparse.csr_matrix.diagonal(pseudodiag)
 [D,modmags]=compute_Haar_dist(mags,lambdav)
 ```
@@ -47,6 +50,8 @@ We can then plot the associated PCoA embedding.
 
 ```
 from Sparsify_Ultrametric.utils import PCoA
+import matplotlib.pyplot as plt
+
 X=PCoA(D,2)
 fig=plt.figure(figsize=(8, 2))
 plt.scatter(-X[:,0] ,-X[:,1] ,c=y, cmap='viridis')
