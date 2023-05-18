@@ -1,3 +1,5 @@
+#To generate figure 7
+
 pseudodiag=scipy.sparse.load_npz('/precomputed/97pseudodiag.npz')
 eigvals=scipy.sparse.linalg.eigs(pseudodiag,500)
 
