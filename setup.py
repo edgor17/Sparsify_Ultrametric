@@ -7,7 +7,7 @@ setup(
     author='Evan Gorman',
     author_email='evan.gorman@colorado.edu',
     packages=['Sparsify_Ultrametric'],
-    install_requires=['numpy','pandas','ete3','scipy','matplotlib','sklearn'],
+    install_requires=['numpy','pandas','ete3','scipy','matplotlib','sklearn','skbio'],
     version='0.1',
     description='Sparsification of Strictly Ultrametric Matrices',
     long_description=long_description
