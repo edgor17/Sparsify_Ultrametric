@@ -3,19 +3,15 @@ import scipy as scipy
 import numpy as np
 from ete3 import Tree
 
-def compute_Haar_dist(abundvecs,Haar_like,weightvec,normalized):
+def compute_Haar_dist(mags,weightvec):
     '''
 
     Parameters
     ----------
-    data : np.ndarray
-        OTU abundance counts where each row is a sample and each column is an OTU ID
-    Haar_like : scipy.sparse.csr_matrix
-        Haar_like basis vectors
+    mags : np.ndarray
+        Projection of OTU abundance count onto Haar-like basis
     weightvec : np.ndarray
         lamba_v's to use in distance computation
-    normalized : bool
-        True if abundance counts should be normalized to sum to 1
 
     Returns
     -------
@@ -26,15 +22,10 @@ def compute_Haar_dist(abundvecs,Haar_like,weightvec,normalized):
 
     '''
     
-    abunds=scipy.sparse.csr_matrix(abundvecs.T)
-    if normalized:
-        abunds=abunds/abunds.sum(0)
-        abunds=scipy.sparse.csr_matrix(abunds)
-    mags=Haar_like@abunds
     modmags=np.transpose(np.asarray(mags.todense())* np.sqrt(weightvec[:, np.newaxis]))
     modmags=scipy.sparse.csr_matrix(modmags)
     
-    N=len(abundvecs[:,0])
+    N=len(mags[:,0])
     
     #Build Haar-like distance matrix
     D=np.zeros((N,N))
