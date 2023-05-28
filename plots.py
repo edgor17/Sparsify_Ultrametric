@@ -12,7 +12,6 @@ plt.xlabel('Internal Node Index (Postorder Traversal)')
 plt.ylabel(r'$\lambda_v \Delta_v^2$')
 plt.title('Comparing the Shallowest and Deepest Mat Samples via the Haar-like Basis')
 plt.legend([one,two,three],[r'$\varphi_{99311}\sim 4.84\times10^{-2}$',r'$\varphi_{6079}\sim 4.84\times10^{-3}$',r'$\varphi_{67317}\sim 4.75\times10^{-3}$'])
-plt.savefig('/Users/Evan/Desktop/pythontrees/paper1spectrogram.png',dpi=400)
 
 plt.show()
 
