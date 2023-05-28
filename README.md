@@ -55,12 +55,13 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import cm
 import numpy as np
 
+depths=Y.values.astype(float)
 haarlikecoord=PCoA(D,2)
 color = iter(cm.viridis(np.linspace(0, 1, 9)))
 fig,ax=plt.subplots(1,figsize=(8, 3))
 for item in np.unique(depths):
     c=next(color)
-    haarlikeplot=ax.scatter(-haarlikecoord[np.where(depths==item),0] ,haarlikecoord[np.where(depths==item),1],c=c,label='.00'+str(item))
+    haarlikeplot=ax.scatter(-haarlikecoord[np.where(depths==item),0] ,haarlikecoord[np.where(depths==item),1],c=c,label='.00'+str(int(item)))
 ax.title.set_text('Haar-like Distance Embedding')
 plt.legend(title="Depth in Meters",loc='center left', bbox_to_anchor=(1.1, .5))
 ```
