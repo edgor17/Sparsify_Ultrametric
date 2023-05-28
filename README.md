@@ -66,7 +66,7 @@ ax.title.set_text('Haar-like Distance Embedding')
 plt.legend(title="Depth in Meters",loc='center left', bbox_to_anchor=(1.1, .5))
 ```
 
+![haarlikeex](https://github.com/edgor17/Sparsify_Ultrametric/assets/87628022/3304d8a8-fc6a-4195-b6a4-657e44075a9e)
 
-![haarlikeex](https://github.com/edgor17/Sparsify_Ultrametric/assets/87628022/cbd4e5fe-1bc3-4567-b0c1-4a230bc99eb0)
 
 
