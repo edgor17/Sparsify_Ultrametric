@@ -31,7 +31,7 @@ pseudodiag=scipy.sparse.load_npz('Sparsify_Ultrametric/precomputed/97pseudodiag.
 
 ### The Haar-like Distance
 
-To demonstrate the Haar-like distance we consider microbial mat samples from the Guerrero Negro hypersaline microbial mat (Harris et al., 2012). This data was obtained from [QIITA](https://qiita.ucsd.edu/study/description/1200#). We read in the feature table (OTU counts) and metadata (containing sample depths) then project these OTU counts onto the Haar-like basis resulting in "mags"
+To demonstrate the Haar-like distance we consider microbial mat samples from the Guerrero Negro hypersaline microbial mat (Harris et al., 2012). This data was obtained from [QIITA](https://qiita.ucsd.edu/study/description/1200#). We read in the feature table (OTU counts) and metadata (containing sample depths) then project these OTU counts onto the Haar-like basis collecting the resulting magnitudes in "mags"
 
 ```
 from Sparsify_Ultrametric.preprocessing import PreProcess
