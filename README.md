@@ -18,7 +18,7 @@ The main goal is to take a binary tree structure and to produce the associated H
 from Sparsify_Ultrametric import Sparsify
 from ete3 import Tree
 
-tree = Tree("/raw_data/97_otus_unannotated.tree",format=1)
+tree = Tree("Sparsify_Ultrametric/raw_data/97_otus_unannotated.tree",format=1)
 [haarlike,pseudodiag]=Sparsify(tree)
 ```
 
@@ -29,17 +29,18 @@ This computation may be slow, we have included the precomputed haarlike and pseu
 To demonstrate the Haar-like distance we consider microbial mat samples from the Guerrero Negro hypersaline microbial mat (Harris et al., 2012). This data was obtained from [QIITA](https://qiita.ucsd.edu/study/description/1200#). We read in the feature table (OTU counts) and metadata (containing sample depths) then project these OTU counts onto the Haar-like basis resulting in "mags"
 
 ```
-from Sparsify_Ultrametric.utils import PreProcess
+from Sparsify_Ultrametric.preprocessing import PreProcess
 import pandas as pd
 
-featuretable=pd.read_csv("/raw_data/mat/otus.txt", sep='\t')
-metadata=pd.read_csv("/raw_data/metadata.txt", sep='\t')
+featuretable=pd.read_csv("Sparsify_Ultrametric/raw_data/otus.txt", sep='\t')
+metadata=pd.read_csv("Sparsify_Ultrametric/raw_data/metadata.txt", sep='\t')
 [X,Y,mags,dic]=PreProcess(featuretable,metadata,'end_depth','regression',tree,haarlike)
 ```
 
 To compute the Haar-like distances between these samples we need to rescale by lambda_v, obtained from the diagonal of our sparsified covariance matrix. 
 
 ```
+import scipy
 from Sparsify_Ultrametric.utils import compute_Haar_dist
 
 lambdav=scipy.sparse.csr_matrix.diagonal(pseudodiag)
@@ -51,16 +52,20 @@ We can then plot the associated PCoA embedding.
 ```
 from Sparsify_Ultrametric.utils import PCoA
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import cm
+import numpy as np
 
-y=Y.values.astype('float')
-X=PCoA(D,2)
-fig=plt.figure(figsize=(8, 2))
-plt.scatter(-X[:,0] ,-X[:,1] ,c=y, norm=colors.LogNorm(vmin=y.min(), vmax=y.max()),cmap='viridis')
-plt.colorbar(label='end_depth')
-plt.title('Haar-like Distances')
+haarlikecoord=PCoA(D,2)
+color = iter(cm.viridis(np.linspace(0, 1, 9)))
+fig,ax=plt.subplots(1,figsize=(8, 3))
+for item in np.unique(depths):
+    c=next(color)
+    haarlikeplot=ax.scatter(-haarlikecoord[np.where(depths==item),0] ,haarlikecoord[np.where(depths==item),1],c=c,label='.00'+str(item))
+ax.title.set_text('Haar-like Distance Embedding')
+plt.legend(title="Depth in Meters",loc='center left', bbox_to_anchor=(1.1, .5))
 ```
 
 
-![paper1](https://github.com/edgor17/Sparsify_Ultrametric/assets/87628022/4998263f-5bc4-44b2-ae12-0df49e380c07)
+![haarlikeex](https://github.com/edgor17/Sparsify_Ultrametric/assets/87628022/cbd4e5fe-1bc3-4567-b0c1-4a230bc99eb0)
 
 
