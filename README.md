@@ -19,7 +19,7 @@ from Sparsify_Ultrametric import Sparsify
 from ete3 import Tree
 
 tree = Tree("Sparsify_Ultrametric/raw_data/97_otus_unannotated.tree",format=1)
-[haarlike,pseudodiag]=Sparsify(tree)
+[haarlike,pseudodiag]=Sparsify.sparsify(tree)
 ```
 
 This computation may take a couple hours to complete, we have included the precomputed haarlike and pseudodiag files for convenience, which can be loaded as:
