@@ -10,7 +10,6 @@ from matplotlib.pyplot import cm
 import numpy as np
 
 tree = Tree("Sparsify_Ultrametric/raw_data/97_otus_unannotated.tree",format=1)
-[haarlike,pseudodiag]=Sparsify(tree)
 haarlike=scipy.sparse.load_npz('Sparsify_Ultrametric/precomputed/97haarlike.npz')
 pseudodiag=scipy.sparse.load_npz('Sparsify_Ultrametric/precomputed/97pseudodiag.npz')
 featuretable=pd.read_csv("Sparsify_Ultrametric/raw_data/otus.txt", sep='\t')
