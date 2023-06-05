@@ -38,7 +38,7 @@ plt.show()
 
 
 
-eigvals=scipy.sparse.linalg.eigs(pseudodiag,500,return_eigenvectors=False)
+eigvals=scipy.sparse.linalg.eigsh(pseudodiag,500,return_eigenvectors=False)
 fig,ax = plt.subplots()
 true=ax.scatter(np.linspace(1,500,500),np.log10(np.flip(eigvals)),facecolors='none',s=20,edgecolors='#1f77b4',label='True Eigenvalues')
 approx=ax.scatter(np.linspace(1,500,500),np.log10(np.flip(np.sort(lambdav))[0:500]),s=20,marker='x',c='#ff7f0e',label='Similar Matrix Diagonal')
