@@ -11,6 +11,8 @@ import numpy as np
 
 tree = Tree("Sparsify_Ultrametric/raw_data/97_otus_unannotated.tree",format=1)
 [haarlike,pseudodiag]=Sparsify(tree)
+haarlike=scipy.sparse.load_npz('Sparsify_Ultrametric/precomputed/97haarlike.npz')
+pseudodiag=scipy.sparse.load_npz('Sparsify_Ultrametric/precomputed/97pseudodiag.npz')
 featuretable=pd.read_csv("Sparsify_Ultrametric/raw_data/otus.txt", sep='\t')
 metadata=pd.read_csv("Sparsify_Ultrametric/raw_data/metadata.txt", sep='\t')
 [X,Y,mags,dic]=PreProcess(featuretable,metadata,'end_depth','regression',tree,haarlike)
@@ -32,7 +34,7 @@ plt.rcParams["mathtext.fontset"] = "cm"
 plt.xlabel('Internal Node Index (Postorder Traversal)')
 plt.ylabel(r'$\lambda_v \Delta_v^2$')
 plt.title('Comparing the Shallowest and Deepest Mat Samples via the Haar-like Basis')
-plt.legend([one,two,three],[r'$\varphi_{99311}\sim 4.84\times10^{-2}$',r'$\varphi_{6079}\sim 4.84\times10^{-3}$',r'$\varphi_{67317}\sim 4.75\times10^{-3}$'])
+plt.legend([one,two,three],[r'$\varphi_{99311}\sim 4.84\times10^{-2}$',r'$\varphi_{6079}\sim 4.84\times10^{-3}$',r'$\varphi_{67317}\sim 4.65\times10^{-3}$'])
 plt.show()
 
 
@@ -94,7 +96,7 @@ plt.subplots_adjust(hspace=.4)
 
 
 
-m = coo_matrix(pseudodiag)
+m = scipy.sparse.coo_matrix(pseudodiag)
 fig = plt.figure()
 ax = fig.add_subplot(111, aspect='equal')
 ax.plot(m.col, np.zeros(len(m.col)), 's', color='#1f77b4', marker=',',linewidth=0)
