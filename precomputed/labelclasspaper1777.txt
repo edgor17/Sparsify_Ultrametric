@@ -1,0 +1,5 @@
+LABELS
+SEPARATOR TAB
+DATA
+4323435	 c__Anaerolineae
+int67316	 c__Anaerolineae
