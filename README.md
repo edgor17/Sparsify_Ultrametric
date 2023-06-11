@@ -25,6 +25,7 @@ tree = Tree("Sparsify_Ultrametric/raw_data/97_otus_unannotated.tree",format=1)
 The sparsify computation may take a couple hours to complete, we have included the precomputed haarlike and pseudodiag files for convenience, which can be loaded as:
 
 ```
+import scipy
 haarlike=scipy.sparse.load_npz('Sparsify_Ultrametric/precomputed/97haarlike.npz')
 pseudodiag=scipy.sparse.load_npz('Sparsify_Ultrametric/precomputed/97pseudodiag.npz')
 ```
