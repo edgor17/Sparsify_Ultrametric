@@ -1,3 +1,5 @@
+#Run this to load data prior to producing any plots
+
 from Sparsify_Ultrametric import Sparsify
 from Sparsify_Ultrametric.utils import compute_Haar_dist, PCoA
 from Sparsify_Ultrametric.preprocessing import PreProcess
@@ -19,24 +21,56 @@ lambdav=scipy.sparse.csr_matrix.diagonal(pseudodiag)
 [D,modmags]=compute_Haar_dist(mags,lambdav)
 
 
-diff=np.square(modmags[0,:].todense()-modmags[16,:].todense()).T
-diff[diff==0]=np.nan
-fig, ax = plt.subplots(figsize=(10,5))
-markerline, stemline, baseline, = ax.stem(np.linspace(1,99322,99322), diff,linefmt='k-',markerfmt='ko',basefmt='k.')
-plt.setp(stemline, linewidth = 1.25)
-plt.setp(stemline, 'linestyle', 'dotted')
-plt.setp(markerline, markersize = 2, fillstyle='none')
-one=plt.scatter(99310,diff[99310].item(),s=50,marker='D',c='#2a4858')
-two=plt.scatter(6078,diff[6078].item(),s=50,marker='D',c='#00898a')
-three=plt.scatter(67316,diff[67316].item(),s=50,marker='D',c='#64c987')
-plt.rcParams["mathtext.fontset"] = "cm"
-plt.xlabel('Internal Node Index (Postorder Traversal)')
-plt.ylabel(r'$\lambda_v \Delta_v^2$')
-plt.title('Comparing the Shallowest and Deepest Mat Samples via the Haar-like Basis')
-plt.legend([one,two,three],[r'$\varphi_{99311}\sim 4.84\times10^{-2}$',r'$\varphi_{6079}\sim 4.84\times10^{-3}$',r'$\varphi_{67317}\sim 4.65\times10^{-3}$'])
-plt.show()
 
 
+
+
+#Figure 5(a)
+
+m = scipy.sparse.coo_matrix(pseudodiag)
+fig = plt.figure()
+ax = fig.add_subplot(111, aspect='equal')
+ax.plot(m.col, np.zeros(len(m.col)), 's', color='#1f77b4', marker=',',linewidth=0)
+ax.set_xlim(0, m.shape[1])
+ax.set_ylim(0, m.shape[0])
+ax.invert_yaxis()
+ax.add_patch(
+     patches.Rectangle(
+        (0, 0),
+        2446,
+        2446,
+        fill=True      
+     ) ) 
+ax.add_patch(
+     patches.Rectangle(
+        (2446, 2446),
+        96876,
+        96876,
+        fill=True      
+     ) ) 
+for spine in ax.spines.values():
+  spine.set_visible(False)
+ax.tick_params(axis=u'both', which=u'both',length=0)
+
+
+#Figure 5(b)
+
+fig = plt.figure()
+ax = fig.add_subplot(111, facecolor='white')
+ax.plot(m.col, m.row, 's', color='#1f77b4', marker=',',linewidth=0)
+ax.set_xlim(0, m.shape[1])
+ax.set_ylim(0, m.shape[0])
+ax.set_aspect('equal')
+for spine in ax.spines.values():
+  spine.set_visible(False)
+ax.invert_yaxis()
+ax.set_aspect('equal')
+#ax.set_xticks([])
+#ax.set_yticks([])
+ax.tick_params(axis=u'both', which=u'both',length=0)
+ax.figure.show()
+
+#Produces figure 6
 
 eigvals=scipy.sparse.linalg.eigsh(pseudodiag,500,return_eigenvectors=False)
 fig,ax = plt.subplots()
@@ -69,6 +103,7 @@ plt.title('500 Largest Eigenvalues of 97% Greengenes')
 
 
 
+#Figure 7
 
 unifrac=pd.read_csv("Sparsify_Ultrametric/precomputed/unifracdists.csv", sep=',')
 DPCoA=pd.read_csv("Sparsify_Ultrametric/precomputed/DPCoAdists.csv", sep=',')
@@ -80,13 +115,9 @@ indices=np.argsort(depths)
 depths=depths[indices]
 sortedunifrac=unifrac.values[np.ix_(indices,indices)]
 sortedDPCoA=DPCoA.values[np.ix_(indices,indices)]
-
-
-
 unifraccoord=PCoA(sortedunifrac,2)
 DPCoAcoord=PCoA(sortedDPCoA,2)
 haarlikecoord=PCoA(D,2)
-
 color = iter(cm.viridis(np.linspace(0, 1, 9)))
 fig,ax=plt.subplots(3,figsize=(8, 8))
 for item in np.unique(depths):
@@ -101,47 +132,21 @@ plt.legend(title="Depth in Meters",loc='center left', bbox_to_anchor=(1.1, 1.85)
 plt.subplots_adjust(hspace=.4)
 
 
+#Produces figure 8(a)
 
-
-m = scipy.sparse.coo_matrix(pseudodiag)
-fig = plt.figure()
-ax = fig.add_subplot(111, aspect='equal')
-ax.plot(m.col, np.zeros(len(m.col)), 's', color='#1f77b4', marker=',',linewidth=0)
-ax.set_xlim(0, m.shape[1])
-ax.set_ylim(0, m.shape[0])
-ax.invert_yaxis()
-ax.add_patch(
-     patches.Rectangle(
-        (0, 0),
-        2446,
-        2446,
-        fill=True      
-     ) ) 
-ax.add_patch(
-     patches.Rectangle(
-        (2446, 2446),
-        96876,
-        96876,
-        fill=True      
-     ) ) 
-for spine in ax.spines.values():
-  spine.set_visible(False)
-ax.tick_params(axis=u'both', which=u'both',length=0)
-
-
-
-
-fig = plt.figure()
-ax = fig.add_subplot(111, facecolor='white')
-ax.plot(m.col, m.row, 's', color='#1f77b4', marker=',',linewidth=0)
-ax.set_xlim(0, m.shape[1])
-ax.set_ylim(0, m.shape[0])
-ax.set_aspect('equal')
-for spine in ax.spines.values():
-  spine.set_visible(False)
-ax.invert_yaxis()
-ax.set_aspect('equal')
-#ax.set_xticks([])
-#ax.set_yticks([])
-ax.tick_params(axis=u'both', which=u'both',length=0)
-ax.figure.show()
+diff=np.square(modmags[0,:].todense()-modmags[16,:].todense()).T
+diff[diff==0]=np.nan
+fig, ax = plt.subplots(figsize=(10,5))
+markerline, stemline, baseline, = ax.stem(np.linspace(1,99322,99322), diff,linefmt='k-',markerfmt='ko',basefmt='k.')
+plt.setp(stemline, linewidth = 1.25)
+plt.setp(stemline, 'linestyle', 'dotted')
+plt.setp(markerline, markersize = 2, fillstyle='none')
+one=plt.scatter(99310,diff[99310].item(),s=50,marker='D',c='#2a4858')
+two=plt.scatter(6078,diff[6078].item(),s=50,marker='D',c='#00898a')
+three=plt.scatter(67316,diff[67316].item(),s=50,marker='D',c='#64c987')
+plt.rcParams["mathtext.fontset"] = "cm"
+plt.xlabel('Internal Node Index (Postorder Traversal)')
+plt.ylabel(r'$\lambda_v \Delta_v^2$')
+plt.title('Comparing the Shallowest and Deepest Mat Samples via the Haar-like Basis')
+plt.legend([one,two,three],[r'$\varphi_{99311}\sim 4.84\times10^{-2}$',r'$\varphi_{6079}\sim 4.84\times10^{-3}$',r'$\varphi_{67317}\sim 4.65\times10^{-3}$'])
+plt.show()
