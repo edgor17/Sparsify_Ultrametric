@@ -2,6 +2,8 @@
 
 This package contains all data and scripts to reproduce the analysis in "Sparsification of Large Ultrametric Matrices: Insights into the Microbial Tree of Life"
 
+For any questions email evan.gorman@colorado.edu
+
 ### Installation 
 
 ```
