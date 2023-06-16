@@ -150,3 +150,5 @@ plt.ylabel(r'$\lambda_v \Delta_v^2$')
 plt.title('Comparing the Shallowest and Deepest Mat Samples via the Haar-like Basis')
 plt.legend([one,two,three],[r'$\varphi_{99311}\sim 4.84\times10^{-2}$',r'$\varphi_{6079}\sim 4.84\times10^{-3}$',r'$\varphi_{67317}\sim 4.65\times10^{-3}$'])
 plt.show()
+
+#Figure 8(b) was produced in iTOL. To reproduce this figure, upload the .nwk file provided in /Precomputed. Next drag all of the .txt files in /Precomputed onto the tree visualization
