@@ -24,7 +24,7 @@ tree = Tree("Sparsify_Ultrametric/raw_data/97_otus_unannotated.tree",format=1)
 [haarlike,pseudodiag]=Sparsify.sparsify(tree)
 ```
 
-The sparsify computation may take a couple hours to complete, we have included the precomputed haarlike and pseudodiag files for convenience, which can be loaded as:
+The sparsify computation may take a while to complete, we have included the precomputed haarlike and pseudodiag files for convenience, which can be loaded as:
 
 ```
 import scipy
